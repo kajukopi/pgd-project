@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PGD Project</title>
+
+  <!-- Start Firebase Compat Files -->
+  <script defer src="/__/firebase/9.12.1/firebase-app-compat.js"></script>
+  <script defer src="/__/firebase/9.12.1/firebase-auth-compat.js"></script>
+  <script defer src="/__/firebase/9.12.1/firebase-database-compat.js"></script>
+  <script defer src="/__/firebase/9.12.1/firebase-firestore-compat.js"></script>
+  <script defer src="/__/firebase/9.12.1/firebase-functions-compat.js"></script>
+  <script defer src="/__/firebase/9.12.1/firebase-messaging-compat.js"></script>
+  <script defer src="/__/firebase/9.12.1/firebase-storage-compat.js"></script>
+  <script defer src="/__/firebase/9.12.1/firebase-analytics-compat.js"></script>
+  <script defer src="/__/firebase/9.12.1/firebase-remote-config-compat.js"></script>
+  <script defer src="/__/firebase/9.12.1/firebase-performance-compat.js"></script>
+  <!-- End Firebase Compat Files -->
+
+  <!-- Start Initial Firebase SDK -->
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  <!-- End Initial Firebase SDK -->
+
+  <!-- Bootstrap CSS Style -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Javascript Index Page -->
+  <script src="js/index.js" defer></script>
+
+</head>
+
+<body class="bg-info">
+
+  <main>
+    <section class="container my-5">
+      <div class="row">
+
+        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+
+          <div class="card rounded-3">
+            <div class="card-body">
+              <h5 class="card-title">Form Karyawan</h5>
+
+              <!-- Form Karyawan -->
+              <form id="form-add-karyawan">
+
+                <div class="mb-3">
+                  <label for="namaKaryawan" class="form-label">Nama Karyawan</label>
+                  <input type="text" class="form-control" id="namaKaryawan" placeholder="Nama lengkap..." required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="tanggalLahir" class="form-label">Tanggal Lahir <code>(12/31/1990)</code></label>
+                  <input type="date" class="form-control" id="tanggalLahir" placeholder="" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="jenisKelamin" class="form-label">Jenis Kelamin</label>
+                  <select class="form-select" aria-label="Pilih Jenis Kelamin" id="jenisKelamin" required>
+                    <option value="" disabled selected>Pilih jenis kelamin...</option>
+                    <option value="m">Pria</option>
+                    <option value="f">Wanita</option>
+                  </select>
+                </div>
+
+                <div class="float-end">
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-8 col-md-6 mb-4 mb-lg-0">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Tabel Karyawan</h5>
+
+              <div class="table-responsive">
+                <table class="table table-bordered align-middle" id="table-karyawan">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="text-center" style="white-space:nowrap;">#ID</th>
+                      <th scope="col" class="text-center" style="white-space:nowrap;">Nama</th>
+                      <th scope="col" class="col-2 text-center" style="white-space:nowrap;">Tanggal Lahir</th>
+                      <th scope="col" class="col-2 text-center" style="white-space:nowrap;">Jenis Kelamin</th>
+                      <th scope="col" class="col-2 text-center" style="white-space:nowrap;">Menu</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Modal -->
+              <div class="modal fade" id="modalKaryawan" tabindex="-1" aria-labelledby="modalKaryawanLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+
+                    <form id="form-edit-karyawan">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalKaryawanLabel">Edit Karyawan</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"
+                          onclick="(modalHide())"></button>
+                      </div>
+                      <div class="modal-body">
+
+                        <div class="mb-3">
+                          <label for="namaKaryawanEdit" class="form-label">Nama Karyawan</label>
+                          <input type="text" class="form-control" id="namaKaryawanEdit" placeholder="Nama lengkap..."
+                            required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="tanggalLahirEdit" class="form-label">Tanggal Lahir
+                            <code>(12/31/1990)</code></label>
+                          <input type="date" class="form-control" id="tanggalLahirEdit" placeholder="" required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="jenisKelaminEdit" class="form-label">Jenis Kelamin</label>
+                          <select class="form-select" aria-label="Pilih Jenis Kelamin" id="jenisKelaminEdit" required>
+                            <option value="" disabled selected>Pilih jenis kelamin...</option>
+                            <option value="m">Pria</option>
+                            <option value="f">Wanita</option>
+                          </select>
+                        </div>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="(modalHide())">
+                          Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+
+</body>
+
+<script src="js/bootstrap.bundle.js" type="text/javascript"></script>
+
+</html>
