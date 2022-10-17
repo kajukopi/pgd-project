@@ -13,6 +13,7 @@ form.addEventListener("submit", function (e) {
     firebase.database().ref().update(data).then(()=>{
       console.log('Document saved!');
       form.reset()
+      nama.focus()
     });
   });
   return false;
