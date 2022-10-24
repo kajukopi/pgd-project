@@ -148,3 +148,43 @@ listening.on("child_changed", function (snap) {
     </td>
   `;
 });
+
+setTimeout(() => {
+  console.log(hitung(10, 10));
+  const db = firebase.database();
+  const ref = db.ref(`data-karyawan`);
+  ref.once("value", function (snap) {
+    if (snap.val()) {
+      console.log(snap.val());
+    }
+  });
+
+  firebase
+    .database()
+    .ref(`data-karyawan`)
+    .on("value", function (snap) {
+      if (snap.val()) {
+        console.log(snap.val());
+      }
+    });
+
+  const arr = [
+    { id: 1, nama: "a" },
+    { id: 2, nama: "b" },
+    { id: 3, nama: "c" },
+    { id: 4, nama: "d" },
+  ];
+  const updates = {};
+
+  for (const value of Object.values(arr)) {
+    updates[`data-pelanggan/${value.id}/`] = value;
+  }
+  firebase.database().ref().update(updates);
+}, 1000);
+
+
+const buttonHello = document.getElementById('button-hello');
+
+buttonHello.addEventListener("click",function(e) {
+  console.log(e.target.textContent);
+})
